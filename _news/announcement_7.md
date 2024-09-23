@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I received the **Cigna Fellowship** from UConn School of Engineering. Thanks UConn School of Engineering!
+I received the **Cigna Fellowship**. Thanks UConn School of Engineering!
