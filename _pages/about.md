@@ -19,7 +19,7 @@ social: true # includes social icons at the bottom of the page
 
 I am a Ph.D. student in the Department of Computer Science and Engineering at the [University of Connecticut](https://uconn.edu/) since Fall 2022, advised by [Prof. Caiwen Ding](https://caiwending.github.io/web/home.html). I obtained my M.S. degree in Geophysics from the Institute of Geophysics, China Earthquake Administration, advised by [Prof. Zhongliang Wu](https://www.ief.ac.cn/222/info/2021/35094.html).
 
-My research interests include high-performance GPU algorithm design and secure and trustworthy AI/ML systems. I am skilled in C++/CUDA programming and CUDA algorithm design, and I enjoy challenging the performance of official libraries. 
+My research interests include high-performance GPU algorithm design and secure and trustworthy AI/ML systems. _I am skilled in C++/CUDA programming and CUDA algorithm design, and I enjoy challenging the performance of official libraries._ 
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
