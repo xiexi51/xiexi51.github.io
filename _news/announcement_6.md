@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I received the **Eversource Fellowship**. Thanks Eversource Energy Center!
+I received the **Eversource Fellowship**. Thanks Uconn Eversource Energy Center!
