@@ -5,6 +5,6 @@ inline: true
 related_posts: false
 ---
 
-Our paper _Accel-GCN: High-Performance GPU Accelerator Design for Graph Convolution Networks_ has been accepted by **ICCAD 23**.
+Our paper _Accel-GCN: High-Performance GPU Accelerator Design for Graph Convolution Networks_ has been accepted by **ICCAD 2023**.
 
 

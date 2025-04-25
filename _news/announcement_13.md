@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper _RANKFLOW: A Multi-Role Collaborative Reranking Workflow Utilizing Large Language Models_ has been accepted by **RelWeb 25**. 
+Our paper _RANKFLOW: A Multi-Role Collaborative Reranking Workflow Utilizing Large Language Models_ has been accepted by **WWW-RelWeb 2025**. 

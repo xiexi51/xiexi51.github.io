@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper _RRNet: Towards ReLU-Reduced Neural Network for Two-party Computation Based Private Inference_ has been accepted by **AAAI workshop 23**.
+Our paper _RRNet: Towards ReLU-Reduced Neural Network for Two-party Computation Based Private Inference_ has been accepted by **AAAI workshop 2023**.
