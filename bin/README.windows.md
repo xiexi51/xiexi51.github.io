@@ -6,6 +6,11 @@ Use PowerShell 7, Git, and GitHub CLI. `master` contains the editable source;
 
 ## One-time setup on Windows x64
 
+Install [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows)
+on each new Windows computer first. It runs alongside Windows PowerShell 5.1.
+For a ZIP installation, add the extracted directory to your user PATH and reopen
+your terminal. Verify `pwsh --version` before running the scripts below.
+
 ```powershell
 git clone https://github.com/xiexi51/xiexi51.github.io.git
 cd xiexi51.github.io
@@ -55,8 +60,10 @@ Alternatively omit `[skip ci]` and let the configured `Deploy site` Action build
 and publish. Do not run the local publication at the same time. The Action now
 uses the recorded runtime versions and does not force-push. Its Linux execution
 uses Ubuntu 24.04 because Ruby 3.3.5 is unavailable on the newer Ubuntu 26.04
-runner image. Template Docker/Lighthouse/link
-workflows may also run and have their own optional credentials/checks.
+runner image. Template Docker/link workflows may also run and have their own
+optional credentials/checks. Lighthouse Badger is disabled in GitHub Actions;
+its source configuration also has no automatic trigger. Before using it again,
+set its target URL to your homepage and configure its authentication.
 For a build-only Action check, manually run `Deploy site` with `publish` unchecked.
 
 Do not use the legacy Docker startup as a lock-preserving build: its entrypoint
@@ -73,7 +80,7 @@ The 2026-11-01 reconciliation retained both histories with the A6000 content:
 - Merge: `7f8972909deac354eba30cb929b6e59350da18cf`, with a tree identical to
   the A6000 snapshot. The current ICLR RTop-K entry and PDF link were retained.
 
-The clearly marked deployment test is `_news/test_personal_computer_20261101.md`.
-Remove that source file and repeat the normal build/publication to remove the test.
+The temporary deployment-test announcement was removed after publication was
+verified. Add real announcements to `_news` using the normal build/publication flow.
 The A6000 working copy was not switched or changed during this migration; sync it
 before using it again, to avoid publishing stale content.
