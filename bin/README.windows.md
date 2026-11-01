@@ -54,7 +54,8 @@ using your preferred static server; opening HTML as `file://` will break root UR
 Alternatively omit `[skip ci]` and let the configured `Deploy site` Action build
 and publish. Do not run the local publication at the same time. The Action now
 uses the recorded runtime versions and does not force-push. Its Linux execution
-is separate from the Windows build verification. Template Docker/Lighthouse/link
+uses Ubuntu 24.04 because Ruby 3.3.5 is unavailable on the newer Ubuntu 26.04
+runner image. Template Docker/Lighthouse/link
 workflows may also run and have their own optional credentials/checks.
 For a build-only Action check, manually run `Deploy site` with `publish` unchecked.
 

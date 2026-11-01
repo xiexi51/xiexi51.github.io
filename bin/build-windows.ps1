@@ -27,6 +27,7 @@ try {
     $dirty = @(git status --porcelain=v1 --untracked-files=all)
     if ($LASTEXITCODE -ne 0) { throw 'Cannot read repository status.' }
     if ($dirty.Count -and !$AllowUncommitted) { throw 'Commit source changes before creating a publishable build, or use -AllowUncommitted for a preview.' }
+    $startingCommit = (git rev-parse HEAD).Trim()
     & (Join-Path $rubyRoot 'bin/ridk.cmd') exec bundle _2.5.7_ check
     if ($LASTEXITCODE -ne 0) { throw 'Ruby dependencies are missing. See bin/README.windows.md.' }
     & (Join-Path $nodeRoot 'npm.cmd') ci --no-audit --no-fund
@@ -38,6 +39,10 @@ try {
     $siteRoot = Join-Path $repoRoot '_site'
     [IO.File]::WriteAllText((Join-Path $siteRoot '.nojekyll'), '')
     $commit = (git rev-parse HEAD).Trim()
+    $endingDirty = @(git status --porcelain=v1 --untracked-files=all)
+    if (!$AllowUncommitted -and ($commit -ne $startingCommit -or $endingDirty.Count)) {
+        throw 'Source changed during the build. Rebuild the final clean commit before publishing.'
+    }
     $files = [ordered]@{}
     Get-ChildItem -LiteralPath $siteRoot -File -Recurse -Force | Sort-Object FullName | ForEach-Object {
         $relative = [IO.Path]::GetRelativePath($siteRoot, $_.FullName).Replace('\', '/')
