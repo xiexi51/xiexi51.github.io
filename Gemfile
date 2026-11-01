@@ -18,10 +18,12 @@ group :jekyll_plugins do
     gem 'jekyll-toc'
     gem 'jekyll-twitter-plugin'
     gem 'jemoji'
-    gem 'mini_racer'
     gem 'unicode_utils'
     gem 'webrick'
 end
+
+# ExecJS uses the pinned Node.js runtime on Windows and Linux.
+gem 'tzinfo-data', platforms: :windows
 group :other_plugins do
     gem 'css_parser'
     gem 'feedjira'

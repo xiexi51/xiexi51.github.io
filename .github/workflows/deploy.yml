@@ -15,6 +15,13 @@ on:
       - "**.yml"
       - "Gemfile"
       - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "bin/requirements-build.txt"
+      - "bin/constraints-build.txt"
+      - "bin/purge-css.cjs"
+      - ".ruby-version"
+      - ".node-version"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -42,6 +49,13 @@ on:
       - "**.yml"
       - "Gemfile"
       - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "bin/requirements-build.txt"
+      - "bin/constraints-build.txt"
+      - "bin/purge-css.cjs"
+      - ".ruby-version"
+      - ".node-version"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -56,6 +70,11 @@ on:
       - "!INSTALL.md"
       - "!README.md"
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the generated website
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -64,14 +83,31 @@ jobs:
   deploy:
     # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
+    concurrency:
+      group: homepage-publish
+      cancel-in-progress: false
+    env:
+      JEKYLL_ENV: production
+      EXECJS_RUNTIME: Node
+      BUNDLE_FROZEN: "true"
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2.2"
+          ruby-version: "3.3.5"
+          bundler: "2.5.7"
           bundler-cache: true
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.9.0"
+          cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10.11"
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -81,15 +117,16 @@ jobs:
           value: ${{ github.repository }}
       - name: Install and Build 🔧
         run: |
-          pip3 install --upgrade jupyter
-          export JEKYLL_ENV=production
+          python -m pip install -r bin/requirements-build.txt
+          npm ci
           bundle exec jekyll build
       - name: Purge unused CSS 🧹
         run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+          node bin/purge-css.cjs
       - name: Deploy 🚀
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+          branch: gh-pages
+          force: false
